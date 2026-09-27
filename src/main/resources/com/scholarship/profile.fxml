@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="12" stylesheets="@styles.css"
+      xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.scholarship.controller.ProfileController">
+    <padding>
+        <Insets top="30" right="40" bottom="30" left="40"/>
+    </padding>
+    <Label styleClass="title" text="Student Profile"/>
+
+    <GridPane hgap="10" vgap="10">
+        <columnConstraints>
+            <ColumnConstraints minWidth="150"/>
+            <ColumnConstraints minWidth="220"/>
+        </columnConstraints>
+
+        <Label text="Full Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label text="Age:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="ageField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="Grade Level:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="gradeLevelCombo" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+        <Label text="Family Income (PHP):" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <TextField fx:id="incomeField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+        <Label text="Person with Disability:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <CheckBox fx:id="disabilityCheck" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+    </GridPane>
+
+    <Label fx:id="errorLabel" styleClass="error"/>
+
+    <HBox spacing="10">
+        <Button onAction="#handleSubmit" text="Find Scholarships"/>
+        <Button onAction="#handleBack" text="Back"/>
+    </HBox>
+</VBox>

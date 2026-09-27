@@ -1,0 +1,14 @@
+.title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.subtitle {
+    -fx-font-size: 14px;
+    -fx-text-fill: #555555;
+}
+
+.error {
+    -fx-text-fill: #d32f2f;
+    -fx-font-weight: bold;
+}
