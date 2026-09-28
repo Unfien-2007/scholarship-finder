@@ -1,7 +1,7 @@
 # Scholarship Finder
 
 A Java desktop application that helps students find scholarships matching their profile.
-Built with **JavaFX** and **MySQL**, demonstrating core Object-Oriented Programming concepts.
+Built with **JavaFX** and **SQLite**, demonstrating core Object-Oriented Programming concepts.
 
 ## Features
 
@@ -17,8 +17,8 @@ Built with **JavaFX** and **MySQL**, demonstrating core Object-Oriented Programm
 |---|---|
 | Language | Java 17 |
 | UI | JavaFX 17 (FXML + CSS) |
-| Database | MySQL 8 |
-| DB access | JDBC (`mysql-connector-j`) |
+| Database | SQLite (file-based, no server) |
+| DB access | JDBC (`sqlite-jdbc`) |
 | Build | Maven |
 
 ## OOP Concepts Used
@@ -42,53 +42,37 @@ Install these before running the project:
 
 1. **JDK 17** (or newer) — https://adoptium.net/
 2. **Maven 3.8+** — https://maven.apache.org/download.cgi
-3. **MySQL 8** — https://dev.mysql.com/downloads/mysql/
-4. **NetBeans 17+** OR **VS Code** (your choice of IDE)
+3. **NetBeans 17+** OR **VS Code** (your choice of IDE)
 
 Verify your setup:
 
 ```bash
 java -version
 mvn -version
-mysql --version
 ```
 
 ---
 
-## 1. Set up the database
+## 1. Database setup — none required
 
-Start MySQL, then import the schema (creates the database, tables, and sample data):
+The app uses **SQLite**, a lightweight file-based database. There is no server to
+install or configure. On first launch, the app automatically:
 
-```bash
-mysql -u root -p < schema.sql
-```
+- Creates `scholarship.db` in the project folder
+- Creates the `students` and `scholarships` tables
+- Seeds the `scholarships` table with 10 sample scholarships
 
-This creates:
-- Database `scholarship_db`
-- Table `students` (4 sample students)
-- Table `scholarships` (10 sample scholarships)
-
-## 2. Set your MySQL credentials
-
-Open `src/main/java/com/scholarship/dao/DatabaseConnection.java` and change these two constants to match your MySQL login:
-
-```java
-private static final String USER = "root";
-private static final String PASSWORD = "password";
-```
-
-> If your MySQL root account has no password, set `PASSWORD = ""`.
+To start fresh, just delete `scholarship.db` and run the app again.
 
 ---
 
-## 3. Run in NetBeans
+## 2. Run in NetBeans
 
 1. Install **Apache NetBeans 17 or later**.
 2. Open NetBeans, then **File → Open Project**.
 3. Select the `scholarship-finder` folder (the one containing `pom.xml`). NetBeans detects it as a Maven project.
 4. Wait for NetBeans to download the dependencies (first time takes a few minutes).
-5. Make sure you've updated `DatabaseConnection.java` with your MySQL password.
-6. Run the app — use either method below:
+5. Run the app — use either method below:
 
    **Method A — Run Maven goal**
    - Right-click the project in the **Projects** pane → **Run Maven → Goals...**
@@ -101,15 +85,14 @@ private static final String PASSWORD = "password";
 
 ---
 
-## 4. Run in VS Code
+## 3. Run in VS Code
 
 1. Install the **Extension Pack for Java** (Microsoft) from the Extensions panel.
    - This includes the Java language support and Maven integration.
 2. Install JDK 17 and set `JAVA_HOME` (or let the extension prompt you to configure a JDK).
 3. Open the `scholarship-finder` folder: **File → Open Folder**.
 4. Wait for the Java extension to import the Maven project and download dependencies.
-5. Update `DatabaseConnection.java` with your MySQL password.
-6. Run the app — use either method below:
+5. Run the app — use either method below:
 
    **Method A — Terminal**
    - Open the integrated terminal (`` Ctrl+` ``) and run:
@@ -148,7 +131,7 @@ private static final String PASSWORD = "password";
 ```
 scholarship-finder/
 ├── pom.xml
-├── schema.sql
+├── scholarship.db        (auto-created on first run)
 └── src/main/
     ├── java/com/scholarship/
     │   ├── Main.java
@@ -181,7 +164,7 @@ scholarship-finder/
 
 ## Troubleshooting
 
-- **"Could not connect to the database"** — MySQL isn't running, or the username/password in `DatabaseConnection.java` is wrong.
-- **"Table 'scholarship_db.scholarships' doesn't exist"** — run `schema.sql` first.
+- **"Could not connect to the database"** — make sure the app can write to the project folder, then delete `scholarship.db` and run again.
+- **"Table 'scholarships' doesn't exist"** — the app creates tables automatically; delete `scholarship.db` and restart to re-initialize.
 - **JavaFX classes can't be found** — use `mvn clean javafx:run` (don't run `Main` directly, which skips the JavaFX module path).
 - **Maven not found** — install Maven and ensure it's on your `PATH`.

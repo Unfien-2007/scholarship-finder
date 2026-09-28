@@ -2,6 +2,7 @@ target/
 build/
 nbdist/
 *.class
+*.db
 
 # IDE files
 .idea/

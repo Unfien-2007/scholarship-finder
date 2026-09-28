@@ -7,10 +7,10 @@ import com.scholarship.model.PrivateScholarship;
 import com.scholarship.model.Scholarship;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,8 +34,8 @@ public class ScholarshipDAO {
                 scholarship.setMinGradeLevel(rs.getInt("min_grade_level"));
                 scholarship.setMaxGradeLevel(rs.getInt("max_grade_level"));
                 scholarship.setMaxFamilyIncome(rs.getDouble("max_family_income"));
-                Date deadline = rs.getDate("deadline");
-                scholarship.setDeadline(deadline != null ? deadline.toLocalDate() : null);
+                String deadline = rs.getString("deadline");
+                scholarship.setDeadline(deadline != null ? LocalDate.parse(deadline) : null);
                 scholarships.add(scholarship);
             }
 
